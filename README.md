@@ -38,11 +38,11 @@ http://processors.wiki.ti.com/index.php/TI-RTOS_CC3200Wireless
 
 Peripherals Exercised
 ---------------------
-Board_LED0 - CC3200_LP_LED_D7 - Red LED
-Board_LED1 - CC3200_LP_LED_D6 - Orange LED
-Board_LED2 - CC3200_LP_LED_D5 - Green LED
+* Board_LED0 - CC3200_LP_LED_D7 - Red LED
+* Board_LED1 - CC3200_LP_LED_D6 - Orange LED
+* Board_LED2 - CC3200_LP_LED_D5 - Green LED
 
-Board_BUTTON1 - CC3200_LP_SW3 - Button SW3
+* Board_BUTTON1 - CC3200_LP_SW3 - Button SW3
 
 WIFI - Wi-Fi is used in this example
 
@@ -68,11 +68,11 @@ Control LED by Sending UDP Packet
 
 The following HEX data sent on UDP port 4000 will control the specific LED.
 
-Send FF00 to turn Red light off
-Send FF11 to turn Red light on
+* Send FF00 to turn Red light off
+* Send FF11 to turn Red light on
 
-Send EE00 to turn Orange light off
-Send EE11 to turn Orange light on
+* Send EE00 to turn Orange light off
+* Send EE11 to turn Orange light on
 
 Tool To Use To Send UDP Packets
 -------------------------------
