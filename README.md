@@ -63,13 +63,14 @@ Green light is off when in AccessPoint Mode (unless you altered code)
 Once connected to the network, you can now toggle LEDs by sending UDP packets to 
 the CC3200 LaunchPad on port 4000
 
-COntrol LED by Sending UDP Packet
+Control LED by Sending UDP Packet
 --------------------------------
 
-The following data sent on UDP port 4000 will control the specific LED.
+The following HEX data sent on UDP port 4000 will control the specific LED.
 
 Send FF00 to turn Red light off
 Send FF11 to turn Red light on
+
 Send EE00 to turn Orange light off
 Send EE11 to turn Orange light on
 
