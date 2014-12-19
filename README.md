@@ -3,7 +3,7 @@ Example Introduction
 This example project provides a starting point for using the "full" TI-RTOS 
 implementation with the CC3200 LaunchPad. This is different to the TI-RTOS 
 implementation in the CC3200 SDK, in that it not only includes SYS/BIOS 
-components on TI-RTOS, but also utilises the peripheral and wifi drivers
+components on TI-RTOS, but also utilises the peripheral drivers
 that are supplied with TI-RTOS.
 
 This has the advantage of making the project more self contained and easy to
@@ -14,7 +14,7 @@ you code will be simplier to upgrade, when that time comes.
 Example Summary
 ---------------
 
-The project toggles the LEDs on the CC3200 LaunchPad depending on UDP Packet 
+The project controls the LEDs on the CC3200 LaunchPad depending on UDP Packet 
 received. See details on how to use below.
 
 The program loads the startproject Task statically. This can be changed via the
@@ -44,7 +44,7 @@ Peripherals Exercised
 
 * Board_BUTTON1 - CC3200_LP_SW3 - Button SW3
 
-WIFI - Wi-Fi is used in this example
+* WIFI - Wi-Fi is used in this example
 
 Example Usage
 -------------
