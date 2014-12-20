@@ -86,3 +86,10 @@ packet tracing.
 
 There are many UDP packet senders for every platform available.
 
+Control LEDs by Using Apple iOS App
+-----------------------------------
+
+If you wish, you can use the iOS app provided on this website to control the LEDs. 
+The App will send the UDP and provides a starting point for communicating with the 
+CC3200 via an iOS App. The repository name is startproject_ios.
+
