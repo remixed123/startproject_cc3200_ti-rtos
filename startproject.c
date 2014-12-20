@@ -314,8 +314,12 @@ Void startproject(UArg arg0, UArg arg1)
         System_abort("Could not initialize WiFi");
     }
 
+    //Set device name. Maximum length of 33 characters
+    unsigned char strDevice[32] = "startproject";
+    sl_NetAppSet (SL_NET_APP_DEVICE_CONFIG_ID, NETAPP_SET_GET_DEV_CONF_OPT_DEVICE_URN, strlen((const char *)strDevice), (unsigned char *) strDevice);
+
     // Set the AP domain name
-    unsigned char strDomain[32] = "lightserver.net";
+    unsigned char strDomain[32] = "startproject.net";
     unsigned char lenDomain = strlen((const char *)strDomain);
     sl_NetAppSet(SL_NET_APP_DEVICE_CONFIG_ID, NETAPP_SET_GET_DEV_CONF_OPT_DOMAIN_NAME, lenDomain, (unsigned char*)strDomain);
 
