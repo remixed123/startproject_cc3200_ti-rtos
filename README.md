@@ -20,6 +20,16 @@ received. See details on how to use below.
 The program loads the startproject Task statically. This can be changed via the
 cfg script tab of the startproject.cfg
 
+StartProject Library
+-------------------
+
+There is a library included (startproject.c) which contains many useful functions 
+that are required when developing applications with the CC3200. These include mDNS, 
+device names, MAC address, date and time and more.
+
+The startproject contains examples for most of the library functions, these can be removed
+if not needed. 
+
 Setup Steps
 -----------
 
@@ -80,9 +90,6 @@ Tool To Use To Send UDP Packets
 There are many tools available to send UDP packets. An easy one that I have 
 used successfully and is free is the UDP Test Tool from SCT - 
 https://www.simplecomtools.com/productcart/pc/viewPrd.asp?idproduct=6& 
-
-Alternatively you can use http://www.httpdebugger.com/ which also enables
-packet tracing.
 
 There are many UDP packet senders for every platform available.
 
