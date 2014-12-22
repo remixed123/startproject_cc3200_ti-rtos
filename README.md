@@ -2,14 +2,14 @@ Example Introduction
 --------------------
 This example project provides a starting point for using the "full" TI-RTOS 
 implementation with the CC3200 LaunchPad. This is different to the TI-RTOS 
-implementation in the CC3200 SDK, in that it not only includes SYS/BIOS 
-components on TI-RTOS, but also utilises the peripheral drivers
-that are supplied with TI-RTOS.
+implementation included in the CC3200 SDK examples. As this TI-RTOS 
+implementation, not only includes SYS/BIOS components of TI-RTOS, but also 
+includes the peripheral drivers that are supplied with TI-RTOS.
 
-This has the advantage of making the project more self contained and easy to
+This has the advantage of making the project more self contained and easier to
 distribute. It also makes for porting to other TI-RTOS supported MCUs and 
 Processors much easier, including later incarnations of the CC3200. Hence
-you code will be simplier to upgrade, when that time comes.
+your code will be simplier to upgrade, when that time comes.
 
 Example Summary
 ---------------
@@ -89,7 +89,7 @@ There are many UDP packet senders for every platform available.
 Control LEDs by Using Apple iOS App
 -----------------------------------
 
-If you wish, you can use the iOS app provided on this website to control the LEDs. 
-The App will send the UDP and provides a starting point for communicating with the 
-CC3200 via an iOS App. The repository name is startproject_ios.
+If you wish, you can use the iOS app provided on this Github account to control the LEDs. 
+The App will send the UDP packets and it provides a starting point for communicating with the 
+CC3200 via an iOS App. The repository name is startproject_ios - https://github.com/remixed123/startproject_ios
 
