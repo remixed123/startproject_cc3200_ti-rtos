@@ -71,9 +71,6 @@ int main(void)
     GPIO_write(Board_LED1, Board_LED_ON); //Orange
     GPIO_write(Board_LED2, Board_LED_ON); //Green
 
-    /* Enable interrupts */
-    //GPIO_enableInt(Board_BUTTON1, GPIO_INT_RISING);
-
     /*
      * The SimpleLink Host Driver requires a mechanism to allow functions to
      * execute in temporary context.  The SpawnTask is created to handle such
