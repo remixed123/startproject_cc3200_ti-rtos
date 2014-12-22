@@ -38,12 +38,14 @@
 //#include <fs.h>
 
  //*****************************************************************************
- // Version Define
+ // Device Defines
  //*****************************************************************************
-#define DEVICE_VERSION		"1.0.0"
-#define DEVICE_MANUFACTURE	"SWIFT_SOFTWARE"
-#define DEVICE_NAME 		"STARTPROJECT"
-#define DEVICE_MODEL		"CC3200"
+#define DEVICE_VERSION			"1.0.0"
+#define DEVICE_MANUFACTURE		"SWIFT_SOFTWARE"
+#define DEVICE_NAME 			"STARTPROJECT"
+#define DEVICE_MODEL			"CC3200"
+#define DEVICE_AP_DOMAIN_NAME	"startproject.net"
+#define DEVICE_SSID_AP_NAME		"StartProjectAP"
 
  //*****************************************************************************
  // SimpleLink/WiFi Defines
@@ -54,6 +56,16 @@
 
 #define TIMEOUT 5
 
+ //*****************************************************************************
+ // mDNS Defines
+ //*****************************************************************************
+#define MDNS_SERVICE  "._control._udp.local"
+#define TTL             120
+#define UNIQUE_SERVICE  1       /* Set 1 for unique services, 0 otherwise */
+
+ //*****************************************************************************
+ // Multitasking Defines
+ //*****************************************************************************
 #define OOB_TASK_PRIORITY				(1)
 #define OSI_STACK_SIZE					(1024)
 
@@ -78,14 +90,18 @@
 #define SL_NETAPP_IPV4_ACQUIRED    1
 
 //*****************************************************************************
-// LightServer Result/Error Type
+// Date and Time Global
+//*****************************************************************************
+extern SlDateTime_t dateTime;
+
+//*****************************************************************************
+// Result/Error Type
 //*****************************************************************************
 //typedef enum {
-//	LS_SUCCESS = 0,
-//	LS_ERROR = -1,
-//	LS_BIT_COUNT_NOT_SUPPORTED = -2,
-//	LS_UNKNOWN_ERROR = -100
-//} lsresult_t;
+//	SP_SUCCESS = 0,
+//	SP_ERROR = -1,
+//	Sp_UNKNOWN_ERROR = -100
+//} spresult_t;
 
 
 #endif /* STARTPROJECT_H_ */

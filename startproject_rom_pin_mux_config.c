@@ -101,6 +101,8 @@ void PinMuxConfig(void)
 	MAP_PinTypeGPIO(PIN_02, PIN_MODE_0, false);
 	MAP_GPIODirModeSet(GPIOA1_BASE, 0x8, GPIO_DIR_MODE_OUT);
 
+
+
 	//
     // Configure PIN_04 for GPIO Input
     //

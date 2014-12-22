@@ -35,6 +35,7 @@
 
 /* StartProject Library Headers */
 #include "startproject.h"
+#include "startprojectlibrary.h"
 
 /* XDCtools Header files */
 #include <xdc/std.h>
@@ -90,6 +91,10 @@ typedef struct
 }_NetCfgIpV4Args_t;
 
 
+//*****************************************************************************
+// Globals for Date and Time
+//*****************************************************************************
+SlDateTime_t dateTime =  {0};
 
 ///////////////////////////////////////////////////////////////////////////////
 // SimpleLink Functions
@@ -274,14 +279,12 @@ void smartConfigFxn()
 //*****************************************************************************
 Void startproject(UArg arg0, UArg arg1)
 {
-    //WiFi_Handle       handle;
-    //WiFi_Params       wifiParams;
-    _NetCfgIpV4Args_t ipV4;
-    //NetCfgIpV4Args_t ipV4;
-    uint8_t           len = sizeof(ipV4);
-    uint8_t           dhcpIsOn;
+    unsigned char len = sizeof(SlNetCfgIpV4Args_t);
+    unsigned char dhcpIsOn = 1;
+    SlNetCfgIpV4Args_t ipV4 = {0};
     int               nbytes;
     int               status;
+    int				  iretVal;
     int               selectRes;
     int               slSocket;
     fd_set            readSet;
@@ -314,20 +317,53 @@ Void startproject(UArg arg0, UArg arg1)
         System_abort("Could not initialize WiFi");
     }
 
+    //Set Device Time and Date
+    iretVal = setDeviceTimeDate();
+    if (iretVal < 0)
+    {
+    	System_printf("Failed to set Device Time and Date\n");
+    	System_flush();
+    }
+
+    //Get Device Time and Date
+    iretVal = getDeviceTimeDate();
+    if (iretVal < 0)
+    {
+    	System_printf("Failed to get Device Time and Date\n");
+    	System_flush();
+    }
+    else // Print out the Date and Time
+    {
+        System_printf("Day: %d", dateTime.sl_tm_day);
+        System_printf(" | Month: %d", dateTime.sl_tm_mon);
+        System_printf(" | Year: %d", dateTime.sl_tm_year);
+        System_printf(" | Hour: %d", dateTime.sl_tm_hour);
+        System_printf(" | Minute: %d", dateTime.sl_tm_min);
+        System_printf(" | Second: %d", dateTime.sl_tm_sec);
+        System_printf("\n\n");
+    	System_flush();
+    }
+
     //Set device name. Maximum length of 33 characters
-    unsigned char strDevice[32] = "startproject";
-    sl_NetAppSet (SL_NET_APP_DEVICE_CONFIG_ID, NETAPP_SET_GET_DEV_CONF_OPT_DEVICE_URN, strlen((const char *)strDevice), (unsigned char *) strDevice);
+    iretVal = setDeviceName();
+    if (iretVal < 0)
+    {
+    	System_printf("Failed to set Device Name\n");
+    	System_flush();
+    }
 
     // Set the AP domain name
-    unsigned char strDomain[32] = "startproject.net";
-    unsigned char lenDomain = strlen((const char *)strDomain);
-    sl_NetAppSet(SL_NET_APP_DEVICE_CONFIG_ID, NETAPP_SET_GET_DEV_CONF_OPT_DOMAIN_NAME, lenDomain, (unsigned char*)strDomain);
+    iretVal = setApDomainName();
+    if (iretVal < 0)
+    {
+    	System_printf("Failed to set AP Domain Name\n");
+    	System_flush();
+    }
 
-
-    // Holding down button switches the connection mode between Station or AccessPoint Mode
+    // Holding down button SW3 while booting will switch between Station or AccessPoint Modes
     // It also sets the AP mode as open security and gives it the standard AP name StartProjectAP
     connectionButton = GPIO_read(Board_BUTTON1);
-    if(connectionButton == 0)
+    if(connectionButton != 0)
     {
 
 		if (configValue == ROLE_STA) {
@@ -336,9 +372,16 @@ Void startproject(UArg arg0, UArg arg1)
 			configValue = sl_WlanSetMode(ROLE_AP);
 
 			// Set SSID name for AP mode
-			unsigned char  str[33] = "StartProjectAP";
-			unsigned short  length = strlen((const char *)str);
-			sl_WlanSet(SL_WLAN_CFG_AP_ID, WLAN_AP_OPT_SSID, length, str);
+			iretVal = setSsidName();
+    	    if (iretVal < 0)
+    	    {
+    	    	System_printf("Failed to set SSID Name\n");
+    	    	System_flush();
+    	    }
+
+			//unsigned char  str[33] = "StartProjectAP";
+			//unsigned short  length = strlen((const char *)str);
+			//sl_WlanSet(SL_WLAN_CFG_AP_ID, WLAN_AP_OPT_SSID, length, str);
 
 			// Set security type for AP mode
 			//Security options are:
@@ -403,28 +446,52 @@ Void startproject(UArg arg0, UArg arg1)
     // Set the color of LED to indicate which mode we are in
     if (configValue == ROLE_STA)
     {
+    	System_printf("Device is in Station Mode\n");
+    	System_flush();
+
         // Turn Green LED on to indicate that device is connected in Station Mode
         GPIO_write(Board_LED0, Board_LED_OFF); //Red
         GPIO_write(Board_LED1, Board_LED_OFF); //Orange
         GPIO_write(Board_LED2, Board_LED_ON); //Green
+
+        // Get the IP Address details.
+        sl_NetCfgGet(SL_IPV4_STA_P2P_CL_GET_INFO,&dhcpIsOn,&len,(_u8 *)&ipV4);
     }
     else
     {
+    	System_printf("Device is in Access Point Mode\n");
+    	System_flush();
+
         // Turn Green LED off to indicate that device is in AP mode
         GPIO_write(Board_LED0, Board_LED_OFF); //Red
         GPIO_write(Board_LED1, Board_LED_OFF); //Orange
         GPIO_write(Board_LED2, Board_LED_OFF); //Green
+
+        // Get the IP Adress details
+        sl_NetCfgGet(SL_IPV4_AP_P2P_GO_GET_INFO,&dhcpIsOn,&len,(_u8 *)&ipV4);
     }
 
-    /* Print IP address */
-    sl_NetCfgGet(SL_IPV4_STA_P2P_CL_GET_INFO, &dhcpIsOn, &len, (unsigned char *)&ipV4);
-    System_printf("CC3100 has connected to an AP and acquired an IP address.\n");
-    System_printf("IP Address: %d.", SL_IPV4_BYTE(ipV4.ipV4, 3));
-    System_printf("%d.", SL_IPV4_BYTE(ipV4.ipV4, 2));
-    System_printf("%d.", SL_IPV4_BYTE(ipV4.ipV4, 1));
-    System_printf("%d", SL_IPV4_BYTE(ipV4.ipV4, 0));
-    System_printf("\n");
+    // Display the IP Address details
+    System_printf("DHCP is %s | IP %d.%d.%d.%d | MASK %d.%d.%d.%d | GW %d.%d.%d.%d | DNS %d.%d.%d.%d\n",
+            (dhcpIsOn > 0) ? "ON" : "OFF",
+            SL_IPV4_BYTE(ipV4.ipV4,3),SL_IPV4_BYTE(ipV4.ipV4,2),SL_IPV4_BYTE(ipV4.ipV4,1),SL_IPV4_BYTE(ipV4.ipV4,0),
+            SL_IPV4_BYTE(ipV4.ipV4Mask,3),SL_IPV4_BYTE(ipV4.ipV4Mask,2),SL_IPV4_BYTE(ipV4.ipV4Mask,1),SL_IPV4_BYTE(ipV4.ipV4Mask,0),
+            SL_IPV4_BYTE(ipV4.ipV4Gateway,3),SL_IPV4_BYTE(ipV4.ipV4Gateway,2),SL_IPV4_BYTE(ipV4.ipV4Gateway,1),SL_IPV4_BYTE(ipV4.ipV4Gateway,0),
+            SL_IPV4_BYTE(ipV4.ipV4DnsServer,3),SL_IPV4_BYTE(ipV4.ipV4DnsServer,2),SL_IPV4_BYTE(ipV4.ipV4DnsServer,1),SL_IPV4_BYTE(ipV4.ipV4DnsServer,0));
     System_flush();
+
+    /* Register mDNS */
+    iretVal = registerMdnsService();
+    if (iretVal < 0)
+    {
+    	System_printf("mDNS Failed to Register\n");
+    	System_flush();
+    }
+    else
+    {
+    	System_printf("mDNS Service %s on Port %d Successfully Registered\n", MDNS_SERVICE, UDPPORT);
+    	System_flush();
+    }
 
     /* Create a UDP socket */
     slSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);

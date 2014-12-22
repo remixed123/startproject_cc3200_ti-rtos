@@ -60,9 +60,9 @@ int main(void)
     /* Turn on user LED */
     GPIO_write(Board_LED0, Board_LED_ON);
 
-    System_printf("Starting the GPIO Interrupt example\nSystem provider is set"
+    System_printf("Starting the StartProject example\nSystem provider is set"
                   " to SysMin. Halt the target to view any SysMin contents in"
-                  " ROV.\n");
+                  " ROV.\n\n");
     /* SysMin will only print to the console when you call flush or exit */
     System_flush();
 
@@ -70,6 +70,9 @@ int main(void)
     GPIO_write(Board_LED0, Board_LED_ON); //Red
     GPIO_write(Board_LED1, Board_LED_ON); //Orange
     GPIO_write(Board_LED2, Board_LED_ON); //Green
+
+    /* Enable interrupts */
+    //GPIO_enableInt(Board_BUTTON1, GPIO_INT_RISING);
 
     /*
      * The SimpleLink Host Driver requires a mechanism to allow functions to
