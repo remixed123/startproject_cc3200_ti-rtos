@@ -1,8 +1,8 @@
 //*****************************************************************************
 //
 // Application Name        - startproject
-// Application Version     - 1.0.0
-// Application Modify Date - 18th of December 2014
+// Application Version     - 1.1.0
+// Application Modify Date - 23rd of December 2014
 // Application Developer   - Glenn Vassallo
 // Application Contact	   - contact@swiftsoftware.com.au
 // Application Repository  - https://github.com/remixed123/startproject
@@ -17,7 +17,6 @@
 //                           with TI-RTOS.
 //
 // Application Details     - https://github.com/remixed123/startproject/readme.txt
-//
 //
 // Further Details         - If you would like to chat about your next CC3200 project
 //                           then feel free contact us at contact@swiftsoftware.com.au
