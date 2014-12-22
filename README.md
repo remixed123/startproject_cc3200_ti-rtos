@@ -23,7 +23,7 @@ cfg script tab of the startproject.cfg
 StartProject Library
 -------------------
 
-There is a library included (startproject.c) which contains many useful functions 
+There is a library included (startprojectlibrary.c) which contains many useful functions 
 that are required when developing applications with the CC3200. These include mDNS, 
 device names, MAC address, date and time and more.
 
