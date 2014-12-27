@@ -109,7 +109,7 @@ char * getSsidName()
 	unsigned short len = 32;
 	unsigned short  config_opt = WLAN_AP_OPT_SSID;
 	sl_WlanGet(SL_WLAN_CFG_AP_ID, &config_opt , &len, (unsigned char *)ssidName);
-	return ssidName;
+	return (char *)ssidName;
 }
 
 //*****************************************************************************
