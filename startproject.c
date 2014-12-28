@@ -317,6 +317,13 @@ Void startproject(UArg arg0, UArg arg1)
     }
 
     //Set Device Time and Date
+    dateTime.sl_tm_day =   (_u32)21;          // Day of month (DD format) range 1-31
+    dateTime.sl_tm_mon =   (_u32)12;          // Month (MM format) in the range of 1-12
+    dateTime.sl_tm_year =  (_u32)2014;        // Year (YYYY format)
+    dateTime.sl_tm_hour =  (_u32)20;          // Hours in the range of 0-23
+    dateTime.sl_tm_min =   (_u32)30;          // Minutes in the range of 0-59
+    dateTime.sl_tm_sec =   (_u32)15;          // Seconds in the range of  0-59
+
     iretVal = setDeviceTimeDate();
     if (iretVal < 0)
     {
