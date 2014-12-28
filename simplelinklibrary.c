@@ -1,20 +1,15 @@
 //*****************************************************************************
 //
-// Application Name        - startproject
-// Application Version     - 1.1.0
-// Application Modify Date - 23rd of December 2014
+// Application Name        - simplelinklibrary
+// Application Version     - 1.2.0
+// Application Modify Date - 28th of December 2014
 // Application Developer   - Glenn Vassallo
 // Application Contact	   - contact@swiftsoftware.com.au
 // Application Repository  - https://github.com/remixed123/startproject
 //
-// Application Overview    - This example project provides a starting
-//                           point for using the "full" TI-RTOS implementation
-//                           with the CC3200 LaunchPad. This is different
-//                           to the TI-RTOS implementation in the CC3200
-//                           SDK, in that it not only includes SYS/BIOS
-//                           components on TI-RTOS, but also utilises the
-//                           peripheral and wifi drivers that are supplied
-//                           with TI-RTOS.
+// Application Overview    - This library provides some of the most common and
+//							 useful functions that are required when developing
+//						     applications with the CC3100/CC3200.
 //
 // Application Details     - https://github.com/remixed123/startproject/readme.txt
 //
@@ -23,8 +18,8 @@
 //
 //*****************************************************************************
 
-#include "startproject.h"
-#include "startprojectlibrary.h"
+#include "startproject.h"  // This will need to be changed in your project
+#include "simplelinklibrary.h"
 
 #include <stdio.h>
 
@@ -212,7 +207,7 @@ int setDeviceTimeDate()
 //!
 //! Registers the mDNS Service.
 //!
-//! Service settings for type and port are set in startproject.h
+//! Service settings for type and port are set in simplelinklibrary.h
 //!
 //! Returns: On success returns 0
 //!

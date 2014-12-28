@@ -34,7 +34,7 @@
 
 /* StartProject Library Headers */
 #include "startproject.h"
-#include "startprojectlibrary.h"
+#include "simplelinklibrary.h"
 
 /* XDCtools Header files */
 #include <xdc/std.h>
