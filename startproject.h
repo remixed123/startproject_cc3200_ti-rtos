@@ -1,7 +1,7 @@
 //*****************************************************************************
 //
 // Application Name        - startproject
-// Application Version     - 1.1.0
+// Application Version     - 1.2.0
 // Application Modify Date - 23rd of December 2014
 // Application Developer   - Glenn Vassallo
 // Application Contact	   - contact@swiftsoftware.com.au
@@ -56,11 +56,11 @@
  //*****************************************************************************
  // SimpleLink/WiFi Defines
  //*****************************************************************************
-#define UDPPORT         4000 /* Port number to which the connection is bound */
-#define UDPPACKETSIZE   1024
-#define SPI_BIT_RATE    14000000
-
-#define TIMEOUT 5
+//#define UDPPORT         4000 /* Port number to which the connection is bound */
+//#define UDPPACKETSIZE   1024
+//#define SPI_BIT_RATE    14000000
+//
+//#define TIMEOUT 5
 
  //*****************************************************************************
  // Multitasking Defines
@@ -91,7 +91,7 @@
 //*****************************************************************************
 // Date and Time Global
 //*****************************************************************************
-extern SlDateTime_t dateTime;
+//extern SlDateTime_t dateTime;
 
 //*****************************************************************************
 // Result/Error Type

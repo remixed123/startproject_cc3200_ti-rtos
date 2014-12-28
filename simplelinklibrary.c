@@ -1,7 +1,7 @@
 //*****************************************************************************
 //
 // Application Name        - simplelinklibrary
-// Application Version     - 1.2.0
+// Application Version     - 1.3.2
 // Application Modify Date - 28th of December 2014
 // Application Developer   - Glenn Vassallo
 // Application Contact	   - contact@swiftsoftware.com.au
@@ -18,13 +18,9 @@
 //
 //*****************************************************************************
 
-#include "startproject.h"  // This will need to be changed in your project
 #include "simplelinklibrary.h"
 
 #include <stdio.h>
-
-/* XDCtools Header files */
-//#include <xdc/runtime/System.h>
 
 //*****************************************************************************
 // Globals used by mDNS
@@ -67,8 +63,6 @@ char * getMacAddress()
 //!
 //! Returns the Device Name as a string
 //!
-//! Returns: On success, zero is returned. On error, -1 is returned
-//!
 //****************************************************************************
 char * getDeviceName()
 {
@@ -81,8 +75,6 @@ char * getDeviceName()
 //! getApDomainName
 //!
 //! Returns the Access Point Domain Name as a string
-//!
-//! Returns: On success, zero is returned. On error, -1 is returned
 //!
 //****************************************************************************
 char * getApDomainName()
@@ -117,7 +109,7 @@ char * getSsidName()
 //****************************************************************************
 int getDeviceTimeDate()
 {
-	uint8_t iretVal;
+	int iretVal;
 	//dateTime =  {0};
 	unsigned char configLen = (unsigned char)sizeof(SlDateTime_t);
 	unsigned char configOpt = (unsigned char)SL_DEVICE_GENERAL_CONFIGURATION_DATE_TIME;
@@ -135,7 +127,7 @@ int getDeviceTimeDate()
 //****************************************************************************
 int setDeviceName()
 {
-	uint8_t iretVal;
+	int iretVal;
 	unsigned char strDeviceName[32] = DEVICE_NAME;
 	iretVal = sl_NetAppSet (SL_NET_APP_DEVICE_CONFIG_ID, NETAPP_SET_GET_DEV_CONF_OPT_DEVICE_URN, strlen((const char *)strDeviceName), (unsigned char *) strDeviceName);
 	return iretVal;
@@ -151,7 +143,7 @@ int setDeviceName()
 //****************************************************************************
 int setApDomainName()
 {
-	uint8_t iretVal;
+	int iretVal;
 	unsigned char strDomain[32] = DEVICE_AP_DOMAIN_NAME;
 	unsigned char lenDomain = strlen((const char *)strDomain);
 	iretVal = sl_NetAppSet(SL_NET_APP_DEVICE_CONFIG_ID, NETAPP_SET_GET_DEV_CONF_OPT_DOMAIN_NAME, lenDomain, (unsigned char*)strDomain);
@@ -172,7 +164,7 @@ int setApDomainName()
 //****************************************************************************
 int setSsidName()
 {
-	uint8_t iretVal;
+	int iretVal;
 	unsigned char  str[33] = "StartProjectAP";
 	unsigned short  length = strlen((const char *)str);
 	iretVal = sl_WlanSet(SL_WLAN_CFG_AP_ID, WLAN_AP_OPT_SSID, length, str);
@@ -190,7 +182,7 @@ int setSsidName()
 //****************************************************************************
 int setDeviceTimeDate()
 {
-	uint8_t iretVal;
+	int iretVal;
 	SlDateTime_t dateTime= {0};
 	dateTime.sl_tm_day =   (_u32)21;          // Day of month (DD format) range 1-31
 	dateTime.sl_tm_mon =   (_u32)12;          // Month (MM format) in the range of 1-12
@@ -214,8 +206,8 @@ int setDeviceTimeDate()
 //****************************************************************************
 int registerMdnsService()
 {
-	uint8_t iretVal;
-	uint8_t i;
+	int iretVal;
+	unsigned int i;
 
 	// Create mDNS Service Name
 	for (i = 0; i < 40; i++)
@@ -267,12 +259,9 @@ int registerMdnsService()
 //****************************************************************************
 int unregisterMdnsService()
 {
-	uint8_t iretVal;
+	int iretVal;
 	iretVal = sl_NetAppMDNSUnRegisterService((const signed char *)mdnsServiceName,strlen(mdnsServiceName));
 	return iretVal;
 }
-
-
-
 
 
