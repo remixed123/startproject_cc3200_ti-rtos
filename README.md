@@ -30,6 +30,15 @@ device names, MAC address, date and time and more.
 The startproject contains examples for most of the library functions, these can be removed
 if not needed. 
 
+Step For Cloning Repository
+---------------------------
+
+If you wish to contribute to the development of this example, please view the detailed
+step at the following link to see how you can clone this repository to be used with 
+Code Composure Studio.
+
+http://e2e.ti.com/support/development_tools/code_composer_studio/f/81/p/407947/1453775#1453775
+
 Setup Steps
 -----------
 
